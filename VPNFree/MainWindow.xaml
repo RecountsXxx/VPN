@@ -1,0 +1,269 @@
+﻿<Window x:Class="VPNFree.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VPNFree"
+        mc:Ignorable="d"
+        AllowsTransparency="True"
+        Title="VPN Free" Height="510" ResizeMode="NoResize" WindowStyle="None" Background="Transparent" WindowStartupLocation="CenterScreen" Width="313" Closed="Window_Closed" Icon="/ResourcesImage/ic_vpn_lock_128_28770.ico">
+
+    <Border CornerRadius="10" Height="498" VerticalAlignment="Center" Margin="3,0,0,0">
+        <Border.Background>
+            <ImageBrush ImageSource="/Images/map.png"
+                        Stretch="None"/>
+        </Border.Background>
+        <Border CornerRadius="10"                    
+            BorderThickness="2"
+            Opacity="0.95" HorizontalAlignment="Center" Width="310" Height="500" VerticalAlignment="Center">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#462AD8" Offset="0"/>
+                    <GradientStop Color="#DA34AE" Offset="0.75"/>
+                    <GradientStop Color="#8A16C1" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="#FF353535" Offset="0"/>
+                    <GradientStop Color="#FF282828" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid MouseDown="Drag" Background="Transparent" Margin="-2,-2,-2,-2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="74*"/>
+                    <ColumnDefinition Width="81*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="62*"/>
+                    <RowDefinition Height="Auto" MinHeight="305.041"/>
+                    <RowDefinition Height="auto"/>
+
+                </Grid.RowDefinitions>
+                <UniformGrid Grid.Row="0" Columns="4" Margin="0,37,0,0" Grid.ColumnSpan="2">
+                    <Border CornerRadius="30" Background="#FF353535" Width="40" Height="40">
+                        <Button x:Name="menuBtn" Click="menuBtn_Click" Template="{StaticResource buttonTemplate }" Height="35" Width="35" BorderBrush="Transparent">
+                            <Button.Background>
+                                <ImageBrush ImageSource="\ResourcesImage\menuq.png"></ImageBrush>
+                            </Button.Background>
+                        </Button>
+                    </Border>
+
+                    <Label FontWeight="bold" Content="VPN" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="Cascadia Code" Foreground="white"/>
+                    <Label FontWeight="bold" Content="Free" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Cascadia Code"  Foreground="#FF05C421"/>
+                    <Border CornerRadius="30" Background="#FF353535" Width="40" Height="40">
+                        <Button Click="buyDonate_Click" Template="{StaticResource buttonTemplate}" Width="35" BorderBrush="Transparent" Height="35">
+                            <Button.Background>
+                                <ImageBrush ImageSource="\ResourcesImage\premiumq.png"/>
+                            </Button.Background>
+                        </Button>
+                    </Border>
+                </UniformGrid>
+
+                <UniformGrid Rows="5" Margin="0,121,0,50" Grid.RowSpan="3" Grid.ColumnSpan="2">
+                    <Label Name="timerLabel" HorizontalAlignment="Center" Content="0:00:00" FontSize="48" FontFamily="Cascadia Code" Foreground="White" Margin="0,-21,0,12"></Label>
+                    <Label Name="disconConnecLabel" HorizontalAlignment="Center" Content="Disconnected" FontSize="14" FontFamily="Cascadia Code" Foreground="#FFFC4A4A" Margin="0,-19,0,43"></Label>
+                    <RadioButton x:Name="disconnectRadioBtn" Template="{StaticResource radioButtonTemplate}" Background="Red" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Top"  Height="15" Width="15"  Margin="0,-50,0,0"/>
+                    <ToggleButton IsChecked="False" x:Name="onOffButton" Click="OnOffVpn_Click" Style="{StaticResource styleToggleButton}" RenderTransformOrigin="0.5,0.5" Margin="90,-71,90,35">
+                        <ToggleButton.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="90"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ToggleButton.RenderTransform>
+                    </ToggleButton>
+                    <RadioButton x:Name="connectRadioBtn" Template="{StaticResource radioButtonTemplate}" Background="AliceBlue" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Top" Height="15" Width="15"/>
+                </UniformGrid>
+
+                <UniformGrid Grid.Row="2" Grid.ColumnSpan="2">
+                    <StackPanel>
+
+                        <ComboBox SelectionChanged="comboBoxHostName_SelectionChanged" Background="Transparent" BorderBrush="Transparent" x:Name="comboBoxHostName" Height="62" Margin="0,4,0,-4" Width="304">
+
+
+                            <ComboBoxItem x:Name="premiumHost1">
+                                <Border>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0" Width="70" Height="70" Source="\ResourcesImage\france.png"></Image>
+                                        <StackPanel Grid.Column="1">
+                                            <Label Foreground="White" VerticalAlignment="Top" FontSize="18" Content="Fast France"></Label>
+                                            <Label Foreground="GreenYellow" VerticalAlignment="Bottom" FontSize="14" Content="94.23.57.8"></Label>
+                                        </StackPanel>
+
+                                    </Grid>
+                                </Border>
+                            </ComboBoxItem>
+
+
+                            <ComboBoxItem  x:Name="premiumHost2">
+                                <Border>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0" Width="70" Height="70" Source="\ResourcesImage\germany.png"></Image>
+                                        <StackPanel Grid.Column="1">
+                                            <Label Foreground="White" VerticalAlignment="Top" FontSize="18" Content="Fast Germany"></Label>
+                                            <Label Foreground="GreenYellow" VerticalAlignment="Bottom" FontSize="14" Content="94.23.57.8"></Label>
+                                        </StackPanel>
+
+                                    </Grid>
+                                </Border>
+                            </ComboBoxItem>
+
+
+
+                            <ComboBoxItem>
+                                <Border>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0" Width="70" Height="70" Source="\ResourcesImage\poland.png"></Image>
+                                        <StackPanel Grid.Column="1">
+                                            <Label Foreground="White" VerticalAlignment="Top" FontSize="18" Content="Poland"></Label>
+                                            <Label Foreground="GreenYellow" VerticalAlignment="Bottom" FontSize="14" Content="51.68.152.226"></Label>
+                                        </StackPanel>
+
+                                    </Grid>
+                                </Border>
+                            </ComboBoxItem>
+                            <ComboBoxItem >
+                                <Border>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0" Width="70" Height="70" Source="\ResourcesImage\USA.png"></Image>
+                                        <StackPanel Grid.Column="1">
+                                            <Label Foreground="White" VerticalAlignment="Top" FontSize="18" Content="USA 1"></Label>
+                                            <Label Foreground="GreenYellow" VerticalAlignment="Bottom" FontSize="14" Content="198.7.62.204"></Label>
+                                        </StackPanel>
+
+                                    </Grid>
+                                </Border>
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <Border>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0" Width="70" Height="70" Source="\ResourcesImage\USA.png"></Image>
+                                        <StackPanel Grid.Column="1">
+                                            <Label Foreground="White" VerticalAlignment="Top" FontSize="18" Content="USA 2"></Label>
+                                            <Label Foreground="GreenYellow" VerticalAlignment="Bottom" FontSize="14" Content="198.7.58.147"></Label>
+                                        </StackPanel>
+
+                                    </Grid>
+                                </Border>
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <Border>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0" Width="70" Height="70" Source="\ResourcesImage\germany.png"></Image>
+                                        <StackPanel Grid.Column="1">
+                                            <Label Foreground="White" VerticalAlignment="Top" FontSize="18" Content="Germany"></Label>
+                                            <Label Foreground="GreenYellow" VerticalAlignment="Bottom" FontSize="14" Content="51.68.180.4"></Label>
+                                        </StackPanel>
+
+                                    </Grid>
+                                </Border>
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <Border>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0" Width="70" Height="70" Source="\ResourcesImage\canada.png"></Image>
+                                        <StackPanel Grid.Column="1">
+                                            <Label Foreground="White" VerticalAlignment="Top" FontSize="18" Content="Canada 1"></Label>
+                                            <Label Foreground="GreenYellow" VerticalAlignment="Bottom" FontSize="14" Content="192.99.37.222"></Label>
+                                        </StackPanel>
+
+                                    </Grid>
+                                </Border>
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <Border>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0" Width="70" Height="70" Source="\ResourcesImage\canada.png"></Image>
+                                        <StackPanel Grid.Column="1">
+                                            <Label Foreground="White" VerticalAlignment="Top" FontSize="18" Content="Canada 2"></Label>
+                                            <Label Foreground="GreenYellow" VerticalAlignment="Bottom" FontSize="14" Content="198.27.69.198"></Label>
+                                        </StackPanel>
+
+                                    </Grid>
+                                </Border>
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <Border>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0" Width="70" Height="70" Source="\ResourcesImage\france.png"></Image>
+                                        <StackPanel Grid.Column="1">
+                                            <Label Foreground="White" VerticalAlignment="Top" FontSize="18" Content="France 1"></Label>
+                                            <Label Foreground="GreenYellow" VerticalAlignment="Bottom" FontSize="14" Content="37.187.158.97"></Label>
+                                        </StackPanel>
+
+                                    </Grid>
+                                </Border>
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <Border>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0" Width="70" Height="70" Source="\ResourcesImage\france.png"></Image>
+                                        <StackPanel Grid.Column="1">
+                                            <Label Foreground="White" VerticalAlignment="Top" FontSize="18" Content="France 2"></Label>
+                                            <Label Foreground="GreenYellow" VerticalAlignment="Bottom" FontSize="14" Content="94.23.57.8"></Label>
+                                        </StackPanel>
+
+                                    </Grid>
+                                </Border>
+                            </ComboBoxItem>
+
+                        </ComboBox>
+
+                        <Label Foreground="DarkGray" FontSize="12" FontWeight="Medium" FontFamily="Montserrat" Content="© Copyright Bogdan"></Label>
+                    </StackPanel>
+                </UniformGrid>
+                <Image Source="\ResourcesImage\ic_vpn_lock_128_28770.ico" RenderTransformOrigin="-6.116,-1.402" Margin="10,9,102,68"/>
+                <Label Content="VPN" FontSize="16" FontWeight="Bold" Margin="43,9,10,68"  FontFamily="Cascadia Code" Foreground="White"/>
+                <Label Content="Free" FontSize="16" FontWeight="Bold" Margin="78,9,10,68" FontFamily="Cascadia Code" Foreground="#FF05C421"/>
+                
+
+                <Button Template="{StaticResource buttonHide}" Style="{StaticResource styleHideButton}" x:Name="hideBtn" BorderBrush="Transparent" HorizontalAlignment="Left" Margin="125,0,0,0" VerticalAlignment="Top" Height="32" Width="39" Click="hideBtn_Click" Grid.Column="1" Cursor="Hand"/>
+                <Button Template="{StaticResource buttonClose}" Style="{StaticResource styleCloseButton}" x:Name="closeBtn" BorderBrush="Transparent"  HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Top" Height="32" Width="39" Click="closeBtn_Click" Grid.Column="1"/>
+
+
+            </Grid>
+        </Border>
+    </Border>
+</Window>
